@@ -67,14 +67,23 @@ updatePage()
 
 // Add New Jokes
 
-// var jokeRemember = document.getElementById('joke-save')
-// // var addJoke = function () {
-// //   var jokeAboutInput = document.getElementById('joke-about')
-// //   var jokeSetupInput = document.getElementById('joke-setup')
-// //   var jokePunchlineInput = document.getElementById('joke-punchline')
-// //   jokes = jokes[jokeAboutInput]
-// // }
-// jokeRemember.addEventListener('click', addJoke)
+var jokeRemember = document.getElementById('joke-save')
+var jokeAboutInput = document.getElementById('joke-about')
+var jokeSetupInput = document.getElementById('joke-setup')
+var jokePunchlineInput = document.getElementById('joke-punchline')
+var addJoke = function () {
+  var jokeInputKey = jokeAboutInput.value
+  var jokeSetup = jokeSetupInput.value
+  var jokePunchline = jokePunchlineInput.value
+  jokes[jokeInputKey] = {
+    'setup': jokeSetup,
+    'punchline': jokePunchline
+  }
+
+  updateJokesMenu()
+  console.log(jokes)
+}
+jokeRemember.addEventListener('click', addJoke)
 
 // Remove Jokes
 var jokeForget = document.getElementById('joke-forget')
