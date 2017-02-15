@@ -24,6 +24,11 @@ var noJokesMessage = 'I... I don\'t know any jokes. 😢'
 // Update the listed jokes, based on the jokes object
 var jokesMenuList = document.getElementById('jokes-menu')
 var updateJokesMenu = function () {
+  // var stringifiedJokes = window.localStorage.getItem('joke')
+  // window.localStorage.getItem('joke')
+  // window.localStorage.setItem('joke', JSON.stringify(jokes))
+  // var jokes = JSON.parse(stringifiedJokes)
+
   // Don't worry too much about this code for now.
   // You'll learn how to do advanced stuff like
   // this in a later lesson.
@@ -79,7 +84,6 @@ var addJoke = function () {
     'setup': jokeSetup,
     'punchline': jokePunchline
   }
-
   updateJokesMenu()
   console.log(jokes)
 }
@@ -99,3 +103,4 @@ jokeForget.addEventListener('click', removeJoke)
 
 // Keep the requested joke up-to-date
 requestedJokeInput.addEventListener('input', updateDisplayedJoke)
+
