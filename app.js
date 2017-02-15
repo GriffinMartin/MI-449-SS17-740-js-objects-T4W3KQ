@@ -13,7 +13,6 @@ var jokes = {
     punchline: 'With an asteroid belt.'
   }
 }
-
 // The message to display if the jokes object is empty
 var noJokesMessage = 'I... I don\'t know any jokes. 😢'
 
@@ -21,18 +20,25 @@ var noJokesMessage = 'I... I don\'t know any jokes. 😢'
 // PAGE UPDATERS
 // -------------
 
+var newJokes = JSON.parse(window.localStorage.getItem('joke'))
+
+var updateJokesObject = function () {
+  var stringifiedJokes = JSON.stringify(newJokes)
+  if (newJokes === null) {
+    newJokes = jokes
+  }
+  window.localStorage.setItem('joke', stringifiedJokes)
+  window.localStorage.getItem('joke')
+}
+
 // Update the listed jokes, based on the jokes object
 var jokesMenuList = document.getElementById('jokes-menu')
 var updateJokesMenu = function () {
-  // var stringifiedJokes = window.localStorage.getItem('joke')
-  // window.localStorage.getItem('joke')
-  // window.localStorage.setItem('joke', JSON.stringify(jokes))
-  // var jokes = JSON.parse(stringifiedJokes)
-
+  updateJokesObject()
   // Don't worry too much about this code for now.
   // You'll learn how to do advanced stuff like
   // this in a later lesson.
-  var jokeKeys = Object.keys(jokes)
+  var jokeKeys = Object.keys(newJokes)
   var jokeKeyListItems = jokeKeys.join('</li><li>') || noJokesMessage
   jokesMenuList.innerHTML = '<li>' + jokeKeyListItems + '</li>'
 }
@@ -42,10 +48,10 @@ var requestedJokeInput = document.getElementById('requested-joke')
 var jokeBox = document.getElementById('joke-box')
 var updateDisplayedJoke = function () {
   var requestedJokeKey = requestedJokeInput.value
-  if (requestedJokeKey in jokes) {
+  if (requestedJokeKey in newJokes) {
     jokeBox.innerHTML =
-      '<p>' + jokes[requestedJokeKey]['setup'] + '</p>' +
-      '<p>' + jokes[requestedJokeKey]['punchline'] + '</p>'
+      '<p>' + newJokes[requestedJokeKey]['setup'] + '</p>' +
+      '<p>' + newJokes[requestedJokeKey]['punchline'] + '</p>'
   } else {
     jokeBox.innerHTML = '<p>' + noJokesMessage + '</p>'
   }
@@ -57,6 +63,7 @@ var updateDisplayedJoke = function () {
 var updatePage = function () {
   updateJokesMenu()
   updateDisplayedJoke()
+  updateJokesObject()
 }
 
 // -------
@@ -80,12 +87,12 @@ var addJoke = function () {
   var jokeInputKey = jokeAboutInput.value
   var jokeSetup = jokeSetupInput.value
   var jokePunchline = jokePunchlineInput.value
-  jokes[jokeInputKey] = {
+  newJokes[jokeInputKey] = {
     'setup': jokeSetup,
     'punchline': jokePunchline
   }
   updateJokesMenu()
-  console.log(jokes)
+  console.log(newJokes)
 }
 jokeRemember.addEventListener('click', addJoke)
 
@@ -94,8 +101,8 @@ var jokeForget = document.getElementById('joke-forget')
 var removeJoke = function () {
   var jokeToForgetInput = document.getElementById('joke-to-forget')
   var jokeToForgetKey = jokeToForgetInput.value
-  if (jokeToForgetKey in jokes) {
-    delete jokes[jokeToForgetKey]
+  if (jokeToForgetKey in newJokes) {
+    delete newJokes[jokeToForgetKey]
     updateJokesMenu()
   }
 }
