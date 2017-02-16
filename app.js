@@ -34,7 +34,6 @@ var updateJokesObject = function () {
 // Update the listed jokes, based on the jokes object
 var jokesMenuList = document.getElementById('jokes-menu')
 var updateJokesMenu = function () {
-  updateJokesObject()
   // Don't worry too much about this code for now.
   // You'll learn how to do advanced stuff like
   // this in a later lesson.
