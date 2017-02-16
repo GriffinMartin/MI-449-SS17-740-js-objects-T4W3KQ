@@ -53,7 +53,7 @@ var updateDisplayedJoke = function () {
       '<p>' + newJokes[requestedJokeKey]['setup'] + '</p>' +
       '<p>' + newJokes[requestedJokeKey]['punchline'] + '</p>'
   } else {
-    jokeBox.innerHTML = '<p>' + noJokesMessage + '</p>'
+    jokeBox.innerHTML = '<p>' + 'No matching joke found.' + '</p>'
   }
 }
 
@@ -91,8 +91,11 @@ var addJoke = function () {
     'setup': jokeSetup,
     'punchline': jokePunchline
   }
-  updateJokesMenu()
-  console.log(newJokes)
+  updatePage()
+  jokeAboutInput.value = ''
+  jokeSetupInput.value = ''
+  jokePunchlineInput.value = ''
+  // console.log(newJokes)
 }
 jokeRemember.addEventListener('click', addJoke)
 
@@ -103,8 +106,9 @@ var removeJoke = function () {
   var jokeToForgetKey = jokeToForgetInput.value
   if (jokeToForgetKey in newJokes) {
     delete newJokes[jokeToForgetKey]
-    updateJokesMenu()
+    updatePage()
   }
+  jokeToForgetInput.value = ''
 }
 jokeForget.addEventListener('click', removeJoke)
 
