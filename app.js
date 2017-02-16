@@ -20,15 +20,12 @@ var noJokesMessage = 'I... I don\'t know any jokes. 😢'
 // PAGE UPDATERS
 // -------------
 
-var newJokes = JSON.parse(window.localStorage.getItem('joke'))
-
 var updateJokesObject = function () {
   var stringifiedJokes = JSON.stringify(newJokes)
   if (newJokes === null) {
     newJokes = jokes
   }
   window.localStorage.setItem('joke', stringifiedJokes)
-  window.localStorage.getItem('joke')
 }
 
 // Update the listed jokes, based on the jokes object
@@ -68,6 +65,11 @@ var updatePage = function () {
 // -------
 // STARTUP
 // -------
+
+// Set newJokes variable when localStorage isn't empty
+if (JSON.parse(window.localStorage.getItem('joke') !== null)) {
+  var newJokes = JSON.parse(window.localStorage.getItem('joke'))
+}
 
 // Update the page immediately on startup
 updatePage()
