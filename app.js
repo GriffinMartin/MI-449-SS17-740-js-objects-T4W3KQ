@@ -69,6 +69,8 @@ var updatePage = function () {
 // Set newJokes variable when localStorage isn't empty
 if (JSON.parse(window.localStorage.getItem('joke') !== null)) {
   var newJokes = JSON.parse(window.localStorage.getItem('joke'))
+} else {
+  newJokes = jokes
 }
 
 // Update the page immediately on startup
