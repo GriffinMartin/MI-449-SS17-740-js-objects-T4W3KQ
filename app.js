@@ -86,6 +86,7 @@ var jokeRemember = document.getElementById('joke-save')
 var jokeAboutInput = document.getElementById('joke-about')
 var jokeSetupInput = document.getElementById('joke-setup')
 var jokePunchlineInput = document.getElementById('joke-punchline')
+// Add joke to object
 var addJoke = function () {
   var jokeInputKey = jokeAboutInput.value
   var jokeSetup = jokeSetupInput.value
@@ -95,6 +96,7 @@ var addJoke = function () {
     'punchline': jokePunchline
   }
   updatePage()
+  // Clear input
   jokeAboutInput.value = ''
   jokeSetupInput.value = ''
   jokePunchlineInput.value = ''
@@ -111,6 +113,7 @@ var removeJoke = function () {
     delete newJokes[jokeToForgetKey]
     updatePage()
   }
+  // Clear input
   jokeToForgetInput.value = ''
 }
 jokeForget.addEventListener('click', removeJoke)
